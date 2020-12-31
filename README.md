@@ -9,13 +9,15 @@
     gatsby develop
     ```
 
-2.  **Open the code and start customizing!**
+2.  **TODO**
 
-    Your site is now running at http://localhost:8000!
+    - Better mobile support
 
-    Edit files under `src` to update this site!
+    - Multiple sites in NGINX
 
-3.  **Learn more**
+    - Lazy loading Unity projects
+
+3.  **Useful Links**
 
     - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
