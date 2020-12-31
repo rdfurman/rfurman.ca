@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import DemonShanker2 from "../components/demonshanker2";
 import styled from "styled-components";
+import SEO from "../components/seo";
 
 const UnityContainer = styled.div`
   height: 652px;
@@ -16,6 +17,7 @@ const ListExternalLink = (props) => (
 export default function Ludum() {
   return (
     <Layout>
+      <SEO title="Ludum Dare" />
       <h1>Ludum Dare</h1>
       <div>
         <h3>Ludum Dare 29: Demon Shanker 2</h3>

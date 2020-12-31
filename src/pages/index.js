@@ -7,7 +7,7 @@ import SEO from "../components/seo";
 const IndexPage = ({ data }) => {
   return (
     <Layout style={{ margin: `3rem auto`, maxWidth: 600 }}>
-      <SEO title={data.site.siteMetadata.title} />
+      <SEO title="Home" />
       <h1>Hi, my name is Randy.</h1>
       <h2>
         Experienced Software Developer and dabbler in all things devops and

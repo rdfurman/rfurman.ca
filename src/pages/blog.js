@@ -3,10 +3,12 @@ import { Link, graphql } from "gatsby";
 import { css } from "@emotion/react";
 import { rhythm } from "../utils/typography";
 import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 export default function Blog({ data }) {
   return (
     <Layout>
+      <SEO title="Blog" />
       <h1>Blog</h1>
       <p>
         Just some dude hammering on a keyboard in a random corner of the
