@@ -1,13 +1,20 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
+import CornerSkills from "../components/cornerskills";
+import SEO from "../components/seo";
 
 const IndexPage = ({ data }) => {
   return (
     <Layout style={{ margin: `3rem auto`, maxWidth: 600 }}>
-      <h1>WhoAmI</h1>
+      <SEO title={data.site.siteMetadata.title} />
+      <h1>Hi, my name is Randy.</h1>
+      <h2>
+        Experienced Software Developer and dabbler in all things devops and
+        self-hosting.
+      </h2>
       <p>
-        I am a <strong>{data.site.siteMetadata.currentJobTitle}</strong>{" "}
+        <br />I am a <strong>{data.site.siteMetadata.currentJobTitle}</strong>{" "}
         currently employed by{" "}
         <a
           href={data.site.siteMetadata.currentEmployerLink}
@@ -30,6 +37,7 @@ const IndexPage = ({ data }) => {
         </a>{" "}
         in a past life.
       </p>
+      <CornerSkills />
     </Layout>
   );
 };
