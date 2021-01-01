@@ -5,7 +5,7 @@ import styled from "styled-components";
 import SEO from "../components/seo";
 
 const UnityContainer = styled.div`
-  height: 652px;
+  height: 680px;
 `;
 
 const ListExternalLink = (props) => (

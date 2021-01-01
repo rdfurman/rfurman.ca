@@ -15,7 +15,7 @@
 
     - Multiple sites in NGINX
 
-    - Lazy loading Unity projects
+    - Make it a PWA
 
 3.  **Useful Links**
 
