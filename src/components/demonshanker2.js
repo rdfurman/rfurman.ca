@@ -38,7 +38,9 @@ class DemonShanker2 extends Component {
     this.state = {
       showUnity: false,
     };
+  }
 
+  componentDidMount() {
     this.unityContext = new UnityContext({
       codeUrl: "/demonshanker2/Build/build.wasm",
       frameworkUrl: "/demonshanker2/Build/build.framework.js",
