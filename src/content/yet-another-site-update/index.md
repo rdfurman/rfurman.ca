@@ -1,6 +1,6 @@
 ---
 title: "Yet Another Site Update"
-date: "2020-12-28"
+date: "2021-01-01"
 ---
 
 ## New Website
@@ -30,3 +30,5 @@ Anyhow, after a couple hours of rebuilding the UI using new components everythin
 ## Future
 
 Anytime I work on some interesting personal devops project I will write about it. For example I plan on getting [Application Management Panel (AMP)](https://cubecoders.com/AMP) to run along side this personal website. I also recently acquired an extra machine I'd like to use with my current server to make a personal hobby server farm. Stay tuned for updates!
+
+New Year's resolution: post once a month on this blog. 🎉
