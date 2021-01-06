@@ -39,7 +39,7 @@ export default function Layout({ children }) {
         <ul style={{ listStyle: "none", float: "right" }}>
           <ListInternalLink to="/blog">Blog</ListInternalLink>
           <ListInternalLink to="/ludum">Ludum</ListInternalLink>
-          <ListExternalLink to="/amp">AMP</ListExternalLink>
+          {/* <ListExternalLink to="/amp">AMP</ListExternalLink> */}
           <ListExternalLink to="https://github.com/rdfurman">
             <FaGithub size={18} />
           </ListExternalLink>
