@@ -15,9 +15,9 @@
 
     - Better mobile support
 
-    - Multiple sites in NGINX
-
     - Make it a PWA
+
+    - Automate deploy
 
 3.  **Useful Links**
 
