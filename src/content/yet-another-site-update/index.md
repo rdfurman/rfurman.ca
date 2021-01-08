@@ -21,7 +21,7 @@ And now here I am, with yet another website refresh. 😉
 
 ## Old Unity Game
 
-In order to make an old Ludum Dare project I worked on ages ago compatible with modern React websites I had to upgrade the project to the latest LTS version of Unity. This was actually pretty straight forward as Unity has an automatice upgrade process. The problem was that we used deprecated GUI components in our game that had to be manually converted to the newer UI components. Simply upgrading the project without manually converting these to UI components resulted in no UI being rendered in the game, making it pretty difficult to navigate the main menu.
+In order to make an old Ludum Dare project I worked on ages ago compatible with modern React websites I had to upgrade the project to the latest LTS version of Unity. This was actually pretty straight forward as Unity has an automatic upgrade process. The problem was that we used deprecated GUI components in our game that had to be manually converted to the newer UI components. Simply upgrading the project without manually converting these to UI components resulted in no UI being rendered in the game, making it pretty difficult to navigate the main menu.
 
 ![Demon Shanker 2 with no GUI.](ds2_no_gui.png)
 Not a very useful main menu.
