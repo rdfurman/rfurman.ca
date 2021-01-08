@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import styled from "styled-components";
 
 const HeaderListLink = styled.li`
@@ -44,7 +44,7 @@ export default function Layout({ children }) {
             <FaGithub size={18} />
           </ListExternalLink>
           <ListExternalLink to="https://www.linkedin.com/in/randy-furman-572406150/">
-            <FaLinkedinIn size={18} />
+            <FaLinkedin size={18} />
           </ListExternalLink>
         </ul>
       </header>

@@ -7,6 +7,7 @@ date: "2021-01-01"
 
 I've updated my personal site to yet another web framework - [Gatsby](https://www.gatsbyjs.com/). I decided to do this after much reflection on my old site (built using only [React](https://reactjs.org/)) and realizing that it had too much junk. I wanted a simple, easy to maintain, clean site where I can link off to other side projects easily. Gatsby provides a relatively easy to use and modular framework to build sites, and adding a blog to it was easy.
 
+Old website:
 ![Old website.](old_site.png)
 
 The old site used [Bootstrap](https://getbootstrap.com/) for the front end and React. This worked fairly well for a purely static website but Gatsby made it so easy to add all sorts of very useful features such as:
