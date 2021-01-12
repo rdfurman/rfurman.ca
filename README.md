@@ -17,4 +17,4 @@
 
     - Make it a PWA
 
-    - Automate deploy
+    - Automate deploy (https://itnext.io/automate-deployment-with-webhooks-18735f1c7f84)

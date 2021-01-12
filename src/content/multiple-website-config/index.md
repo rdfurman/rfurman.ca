@@ -1,6 +1,7 @@
 ---
 title: "Multiple Websites, Single IP"
 date: "2021-01-06"
+description: "My experience setting up multiple websites to run from a single domain via subdomains."
 ---
 
 ## A Tale of Subdomains and DNS Records

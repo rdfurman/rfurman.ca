@@ -3,7 +3,10 @@ module.exports = {
     title: "rfurman.ca",
     description:
       "Experienced Software Developer and dabbler in all things devops and self-hosting.",
-    author: "Randy Furman",
+    author: {
+      name: "Randy Furman",
+      summary: "who lives and works in San Francisco building useful things.",
+    },
     keywords: "software,devops,developer,ludum,dare",
     siteUrl: "http://rfurman.ca",
     currentJobTitle: "Software Developer",
@@ -72,18 +75,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        icon: "src/content/assets/icon.png",
       },
     },
     "gatsby-transformer-sharp",
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: "./src/images/",
-      },
-      __key: "images",
-    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -108,9 +103,6 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
               maxWidth: 1160,
             },
           },

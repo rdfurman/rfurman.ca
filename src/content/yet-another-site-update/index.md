@@ -1,6 +1,7 @@
 ---
 title: "Yet Another Site Update"
 date: "2021-01-01"
+description: "I wanted a new easy to maintain personal website, so I built one!"
 ---
 
 ## New Website
