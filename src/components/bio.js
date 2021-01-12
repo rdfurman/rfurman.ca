@@ -8,15 +8,8 @@ const AvatarContainer = styled.div`
   margin-bottom: var(--spacing-16);
 `;
 
-const BioSignOff = styled.p`
-  margin-bottom: var(--spacing-0);
-`;
-
-const AvatarImage = styled.image`
-  margin-right: var(--spacing-4);
-  margin-bottom: var(--spacing-0);
-  min-width: 50px;
-  border-radius: 100%;
+const FooterText = styled.p`
+  padding: 10px;
 `;
 
 const Bio = () => {
@@ -24,7 +17,7 @@ const Bio = () => {
     query {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
-          fixed(width: 50, height: 50, quality: 95) {
+          fixed(width: 50, height: 50, quality: 100) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -46,7 +39,7 @@ const Bio = () => {
   return (
     <AvatarContainer>
       {avatar && (
-        <AvatarImage
+        <Image
           fixed={avatar}
           alt={author?.name || ``}
           imgStyle={{
@@ -55,12 +48,12 @@ const Bio = () => {
         />
       )}
       {author?.name && (
-        <BioSignOff>
+        <FooterText>
           Thanks for reading. 'Till the next one.{" "}
           <span role="img" aria-label="Waving hand sign">
             👋
           </span>
-        </BioSignOff>
+        </FooterText>
       )}
     </AvatarContainer>
   );
