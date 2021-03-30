@@ -5,7 +5,6 @@ module.exports = {
       "Experienced Software Developer and dabbler in all things devops and self-hosting.",
     author: {
       name: "Randy Furman",
-      summary: "who lives and works in San Francisco building useful things.",
     },
     keywords: "software,devops,developer,ludum,dare",
     siteUrl: "http://rfurman.ca",
@@ -114,6 +113,10 @@ module.exports = {
       options: {
         pathToConfigModule: "src/utils/typography",
       },
+    },
+    {
+      resolve: "gatsby-plugin-exclude",
+      options: { paths: ["/webhooks/github"] },
     },
   ],
 };
