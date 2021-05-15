@@ -20,15 +20,15 @@ It doesn't really lend itself to the idea of integrating with every other "smart
 
 ![Home Assistant logo](homeassistant-logo.png)
 
-Enter [Home Assistant](https://www.home-assistant.io/). This clever platform allows you to integrate all your IOT devices into a single ecosystem with a nice looking customizable interface. It also allows you to create all kinds of automations and generally makes managing your home full of IOT devices easier. Added bonus: it's efficient enough to run on a Raspberry Pi. Hey I happen to have one of those laying around and since it's only running a network ad blocker, it's basically idling most of the time. Perfect coincidence.
+Enter [Home Assistant](https://www.home-assistant.io/). This clever platform allows you to integrate all your IOT devices into a single ecosystem with a nice looking customizable interface. It also allows you to create all kinds of automations and generally makes managing your home full of IOT devices easier. Added bonus: it's efficient enough to run on a Raspberry Pi. Hey, I happen to have one of those laying around and since it's only running a network ad blocker, it's basically idling most of the time. Perfect coincidence.
 
 Not only that, but there already exists an [integration](https://www.home-assistant.io/integrations/honeywell/) for the Honeywell Total Comfort Connect service (TCC).
 
-Here was the next challenge, this integration is pretty bare bones and no longer supported. It was implemented as a simple climate-type "platform" integration which doesn't allow for the additional outdoor sensor. Also this is no longer up to date with best practices for the Home Assistant project since it can only be setup directly in `configuration/yaml`.
+Here was the next challenge, this integration is pretty bare bones and no longer supported by the original developer. It was implemented as a simple climate-type "platform" integration which doesn't allow for the additional outdoor sensor. Also this is no longer up to date with the best practices for the Home Assistant project since it can only be setup directly in `configuration.yaml`.
 
 Also I don't really no anything about how large Python projects work, so there's that... 🤔
 
-This made for an excellent opportunity for me to upgrade my Python skills. I had to learn about how types, testing, mocking, and many other common things are done in python on my journey to upgrade this Honeywell integration. I will say this however, there are many tools in the Home Assistant project that make all the standard easy to understand and follow. Everything from code styles, test coverage, import handling, etc. are all automatically run and checked as commit hooks. It really makes for cleaner PRs and an overall pretty slick development experience.
+This made for an excellent opportunity for me to upgrade my Python skills. I had to learn about how types, testing, mocking, and many other common dev tasks are done in python on my journey to upgrade this Honeywell integration. I will say this however, there are many tools in the Home Assistant project that make all the standards easy to understand and follow. Everything from code styles, test coverage, import handling, etc. are all automatically run and checked as commit hooks. It really makes for cleaner PRs and an overall pretty slick development experience.
 
 After a few days of stumbling my way around this huge Python project I was able to convert the Honeywell climate platform into a full fledged integration with climate and sensor platforms. With that I can throw together a nice clean looking dashboard:
 

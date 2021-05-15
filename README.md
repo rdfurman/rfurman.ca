@@ -11,6 +11,15 @@
     gatsby develop
     ```
 
+**Update Site**
+Login into server
+
+    ```shell
+    cd [web dir]
+    git pull
+    gatsby build
+    ```
+
 **TODO**
 
     - Better mobile support
