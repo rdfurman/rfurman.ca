@@ -39,5 +39,5 @@ Additional bonus, now I can integrate this with cameras and what ever other neat
 ## The Work
 
 If you're interested in the work behind this, here are the PRs: <br>
-**Honeywell integration:** https://github.com/home-assistant/core/pull/50547<br>
+**Honeywell integration:** https://github.com/home-assistant/core/pull/50731<br>
 **Home Assistant Docs:** https://github.com/home-assistant/home-assistant.io/pull/17814
