@@ -1,6 +1,38 @@
-import React, { Component } from "react";
-import Unity, { UnityContext } from "react-unity-webgl";
+import React, { Component, useState } from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
 import styled from "styled-components";
+
+export default function DemonShanker2() {
+  const [showUnity, setShowUnity] = useState(false);
+
+  const { unityProvider } = useUnityContext({
+    codeUrl: "/demonshanker2/Build/build.wasm",
+    frameworkUrl: "/demonshanker2/Build/build.framework.js",
+    dataUrl: "/demonshanker2/Build/build.data",
+    loaderUrl: "/demonshanker2/Build/build.loader.js",
+  });
+
+  return (
+    <div
+      style={{
+        backgroundColor: "gray",
+        height: "680px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {showUnity ? (
+        <Unity
+          style={{ width: 1160, height: 680 }}
+          unityProvider={unityProvider}
+        />
+      ) : (
+        <PlayButton onClick={() => setShowUnity(true)}>Play</PlayButton>
+      )}
+    </div>
+  );
+}
 
 const PlayButton = styled.button`
   & {
@@ -30,52 +62,3 @@ const PlayButton = styled.button`
     outline-offset: -4px;
   }
 `;
-
-class DemonShanker2 extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      showUnity: false,
-    };
-  }
-
-  componentDidMount() {
-    this.unityContext = new UnityContext({
-      codeUrl: "/demonshanker2/Build/build.wasm",
-      frameworkUrl: "/demonshanker2/Build/build.framework.js",
-      dataUrl: "/demonshanker2/Build/build.data",
-      loaderUrl: "/demonshanker2/Build/build.loader.js",
-    });
-  }
-
-  render() {
-    return (
-      <div
-        style={{
-          backgroundColor: "gray",
-          height: "680px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {this.state.showUnity === true ? (
-          <Unity
-            width="1160px"
-            height="680px"
-            unityContext={this.unityContext}
-          />
-        ) : (
-          <PlayButton
-            onClick={() => this.setState({ showUnity: !this.state.showUnity })}
-          >
-            Play
-          </PlayButton>
-        )}
-      </div>
-    );
-  }
-}
-
-export default DemonShanker2;
