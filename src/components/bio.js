@@ -1,7 +1,7 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import Image from "gatsby-image";
 import styled from "styled-components";
+import { StaticImage } from "gatsby-plugin-image";
 
 const AvatarContainer = styled.div`
   display: flex;
@@ -14,19 +14,15 @@ const FooterText = styled.p`
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
-    query {
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
-        childImageSharp {
-          fixed(width: 50, height: 50, quality: 100) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
+    query BioQuery {
       site {
         siteMetadata {
           author {
             name
             summary
+          }
+          social {
+            twitter
           }
         }
       }
@@ -34,19 +30,19 @@ const Bio = () => {
   `);
 
   const author = data.site.siteMetadata?.author;
-  const avatar = data?.avatar?.childImageSharp?.fixed;
 
   return (
     <AvatarContainer>
-      {avatar && (
-        <Image
-          fixed={avatar}
-          alt={author?.name || ``}
-          imgStyle={{
-            borderRadius: `50%`,
-          }}
-        />
-      )}
+      <StaticImage
+        className="bio-avatar"
+        layout="fixed"
+        formats={["auto", "webp", "avif"]}
+        src="../images/profile-pic.png"
+        width={50}
+        height={50}
+        quality={95}
+        alt="Profile picture"
+      />
       {author?.name && (
         <FooterText>
           Thanks for reading. 'Till the next one.{" "}
