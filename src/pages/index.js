@@ -2,12 +2,12 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import CornerSkills from "../components/cornerskills";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 
 const IndexPage = ({ data }) => {
   return (
     <Layout style={{ margin: `3rem auto`, maxWidth: 600 }}>
-      <SEO title="Home" />
+      <Seo title="Home" />
       <h1>Hi, my name is Randy.</h1>
       <h2>
         Experienced Software Developer and dabbler in all things devops and

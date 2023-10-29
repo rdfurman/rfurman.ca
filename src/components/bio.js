@@ -12,6 +12,13 @@ const FooterText = styled.p`
   padding: 10px;
 `;
 
+const BioAvatar = styled(StaticImage)`
+  margin-right: var(--spacing-4);
+  margin-bottom: var(--spacing-0);
+  min-width: 50px;
+  border-radius: 100%;
+`;
+
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
@@ -20,9 +27,6 @@ const Bio = () => {
           author {
             name
             summary
-          }
-          social {
-            twitter
           }
         }
       }
@@ -33,16 +37,6 @@ const Bio = () => {
 
   return (
     <AvatarContainer>
-      <StaticImage
-        className="bio-avatar"
-        layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
-        width={50}
-        height={50}
-        quality={95}
-        alt="Profile picture"
-      />
       {author?.name && (
         <FooterText>
           Thanks for reading. 'Till the next one.{" "}

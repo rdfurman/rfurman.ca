@@ -21,6 +21,7 @@
     "gatsby": "^5.7.0",
     "gatsby-plugin-emotion": "^8.7.0",
     "gatsby-plugin-exclude": "^1.0.2",
+    "gatsby-plugin-feed": "^5.12.3",
     "gatsby-plugin-image": "^3.9.0",
     "gatsby-plugin-manifest": "^5.7.0",
     "gatsby-plugin-mdx": "^5.7.0",
