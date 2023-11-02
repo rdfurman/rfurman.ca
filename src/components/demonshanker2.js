@@ -1,16 +1,24 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import styled from "styled-components";
 
 export default function DemonShanker2() {
   const [showUnity, setShowUnity] = useState(false);
 
-  const { unityProvider } = useUnityContext({
-    codeUrl: "/demonshanker2/Build/build.wasm",
-    frameworkUrl: "/demonshanker2/Build/build.framework.js",
-    dataUrl: "/demonshanker2/Build/build.data",
-    loaderUrl: "/demonshanker2/Build/build.loader.js",
+  const { unityProvider, isLoaded, unload } = useUnityContext({
+    codeUrl: "/demonshanker2/Build/demonshanker2.wasm",
+    frameworkUrl: "/demonshanker2/Build/demonshanker2.framework.js",
+    dataUrl: "/demonshanker2/Build/demonshanker2.data",
+    loaderUrl: "/demonshanker2/Build/demonshanker2.loader.js",
   });
+
+  useEffect(() => {
+    return async () => {
+      if (isLoaded) {
+        await unload();
+      }
+    };
+  }, [isLoaded, unload]);
 
   return (
     <div
