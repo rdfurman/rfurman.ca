@@ -1,16 +1,16 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 import Bio from "../components/bio";
 
-export default function BlogPost({ data, location }) {
+export default function BlogPost({ data }) {
   const post = data.markdownRemark;
   const { previous, next } = data;
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />

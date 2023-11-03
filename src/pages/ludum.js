@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import DemonShanker2 from "../components/demonshanker2";
 import styled from "styled-components";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 
 const UnityContainer = styled.div`
   height: 680px;
@@ -17,9 +17,9 @@ const ListExternalLink = (props) => (
 export default function Ludum() {
   return (
     <Layout>
-      <SEO title="Ludum Dare" />
+      <Seo title="Ludum Dare" />
       <h1>Ludum Dare</h1>
-      <div>
+      <>
         <h3>Ludum Dare 29: Demon Shanker 2</h3>
         <strong>
           Created for Ludum Dare 29. Built with Unity by a team of 5, with me
@@ -38,7 +38,7 @@ export default function Ludum() {
         <ListExternalLink to="http://ludumdare.com/compo/ludum-dare-29/?action=preview&uid=37215">
           Ludum Dare Entry
         </ListExternalLink>
-      </div>
+      </>
     </Layout>
   );
 }

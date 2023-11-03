@@ -3,14 +3,14 @@ import { Link, graphql } from "gatsby";
 import { css } from "@emotion/react";
 import { rhythm } from "../utils/typography";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 
 export default function Blog({ data }) {
   const posts = data.allMarkdownRemark.nodes;
 
   return (
     <Layout>
-      <SEO title="Blog" />
+      <Seo title="Blog" />
       <h1>Blog</h1>
       <p>
         Just some dude hammering on a keyboard in a random corner of the

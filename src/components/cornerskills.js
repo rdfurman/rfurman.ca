@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
@@ -41,6 +41,12 @@ export default function CornerSkills() {
     `
   );
 
+  const [shuffledSkills, setShuffledSkills] = useState("");
+
+  useEffect(() => {
+    setShuffledSkills(shuffle(site.siteMetadata?.skills).join(" "));
+  }, [site]);
+
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -53,7 +59,7 @@ export default function CornerSkills() {
     <CornerContainer>
       <CornerExclude />
       <CornerFade />
-      <p>{shuffle(site.siteMetadata.skills).join(" ")}</p>
+      <p>{shuffledSkills}</p>
     </CornerContainer>
   );
 }
