@@ -9,6 +9,10 @@ const CornerFade = styled.div`
   width: 45%;
   height: 28%;
   background: linear-gradient(to top left, transparent 35%, white 45%);
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const CornerContainer = styled.div`
@@ -19,6 +23,10 @@ const CornerContainer = styled.div`
   height: 28%;
   text-align: right;
   text-justify: inter-word;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const CornerExclude = styled.div`
