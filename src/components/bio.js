@@ -1,7 +1,6 @@
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
-import { StaticImage } from "gatsby-plugin-image";
 
 const AvatarContainer = styled.div`
   display: flex;
@@ -10,13 +9,6 @@ const AvatarContainer = styled.div`
 
 const FooterText = styled.p`
   padding: 10px;
-`;
-
-const BioAvatar = styled(StaticImage)`
-  margin-right: var(--spacing-4);
-  margin-bottom: var(--spacing-0);
-  min-width: 50px;
-  border-radius: 100%;
 `;
 
 const Bio = () => {
