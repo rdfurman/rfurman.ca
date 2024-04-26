@@ -5,25 +5,21 @@ import WeddingLayout from "../components/weddinglayout";
 export const Head = () => <title>Daisy & Randy 2024 - Info</title>;
 
 const InfoContainer = styled.div`
-  display: "flex";
-  flex-wrap: "wrap";
-  align-items: "flex-start";
-
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
 const InfoBox = styled.div`
-  width: 50vw;
+  width: 50%;
   padding: 5px;
 
   @media (max-width: 768px) {
-    width: 100vw;
+    width: 100%;
   }
 `;
 
-const InfoBoxInnerBorder = styled.div`
+const InfoBoxBorder = styled.div`
   width: 100%;
   border-radius: 15px;
   border: 2px solid black;
@@ -45,7 +41,7 @@ const WeddingInfo = () => {
         }}
       >
         <InfoBox>
-          <InfoBoxInnerBorder>
+          <InfoBoxBorder>
             <InfoBoxTitle>Info</InfoBoxTitle>
             <h3>Schedule</h3>
             <p>
@@ -115,10 +111,10 @@ const WeddingInfo = () => {
               There are also many campgrounds nearby and the whole area is crown
               land so there are a lot of options for camping.
             </p>
-          </InfoBoxInnerBorder>
+          </InfoBoxBorder>
         </InfoBox>
         <InfoBox>
-          <InfoBoxInnerBorder>
+          <InfoBoxBorder>
             <InfoBoxTitle>Location</InfoBoxTitle>
             <h3>Mountain-Aire Resort</h3>
             <h6>
@@ -149,7 +145,7 @@ const WeddingInfo = () => {
               referrerpolicy="no-referrer-when-downgrade"
               title="Map"
             />
-          </InfoBoxInnerBorder>
+          </InfoBoxBorder>
         </InfoBox>
       </InfoContainer>
     </WeddingLayout>
