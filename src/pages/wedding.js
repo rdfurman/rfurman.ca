@@ -1,21 +1,17 @@
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import WeddingLayout from "../components/weddinglayout";
 
-const WeddingPage = () => {
+export const Head = () => <title>Daisy & Randy 2024</title>;
+
+const WeddingHome = () => {
   return (
-    <div
-      style={{
-        display: "grid",
-        minHeight: "100vh",
-      }}
-    >
+    <WeddingLayout>
       <StaticImage
         style={{
-          // gridRow: 1,
           gridArea: "1/1",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          // opacity: 0.9 /* Adjust opacity for better readability */,
           zIndex: -1,
         }}
         layout="fullWidth"
@@ -25,34 +21,39 @@ const WeddingPage = () => {
       />
       <div
         style={{
-          // gridRow: 1,
           gridArea: "1/1",
           display: "flex",
           flexDirection: "column",
           justifyContent: "normal",
           alignItems: "center",
-          color: "white" /* Adjust content color for visibility */,
+          color: "white",
           padding: "2rem",
+          marginTop: "50px",
         }}
       >
         <div
           style={{
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
             paddingTop: "20px",
             paddingLeft: "20px",
             paddingRight: "20px",
             textAlign: "center",
+            boxShadow: "0 0 10px 10px rgba(0, 0, 0, 0.6)",
           }}
         >
           <h1 style={{ fontWeight: "bolder", fontFamily: "cursive" }}>
             We're Getting Hitched!
           </h1>
-          <h3>2024-10-18</h3>
-          <p>Out in the bush.</p>
+          <h3 style={{ fontWeight: "bolder", fontFamily: "cursive" }}>
+            2024-10-18
+          </h3>
+          <h3 style={{ fontFamily: "cursive" }}>
+            Mountain-Aire Resort & Campground
+          </h3>
         </div>
       </div>
-    </div>
+    </WeddingLayout>
   );
 };
 
-export default WeddingPage;
+export default WeddingHome;

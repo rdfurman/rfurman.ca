@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../components/layout";
-import DemonShanker2 from "../components/demonshanker2";
 import styled from "styled-components";
+import DemonShanker2 from "../components/demonshanker2";
+import Layout from "../components/layout";
 import Seo from "../components/seo";
 
 const UnityContainer = styled.div`
