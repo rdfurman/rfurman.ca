@@ -16,7 +16,7 @@ const InfoContainer = styled.div`
 `;
 
 const InfoBox = styled.div`
-  width: 49.2vw;
+  width: 49vw;
   border-radius: 15px;
   border: 2px solid black;
   margin-right: 0.5vw;
