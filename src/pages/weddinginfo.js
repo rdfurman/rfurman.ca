@@ -53,7 +53,11 @@ const WeddingInfo = () => {
             6PM - Dinner
           </p>
           <h3>Accomodations</h3>
-          <p>Everything is first-come-first-serve. All prices include tax.</p>
+          <p>
+            Everything is{" "}
+            <strong style={{ color: "red" }}>first-come-first-serve</strong>.
+            All prices include tax.
+          </p>
           <h5>Motel Rooms</h5>
           <p>
             The motel rooms have 2 queen beds, a small kitchenette with a mini

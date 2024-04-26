@@ -69,7 +69,9 @@ export default function WeddingMenu() {
     <StyleMenuContainer>
       <StyledLinksBox open={hamburgerOpen}>
         <ListInternalLink to="/weddinginfo">Info</ListInternalLink>
-        <ListExternalLink to="https://google.ca">RSVP</ListExternalLink>
+        <ListExternalLink to="https://forms.gle/rtPBvcnA7sPaT7EE7">
+          RSVP
+        </ListExternalLink>
       </StyledLinksBox>
       <StyledHamburgerBox open={hamburgerOpen}>
         <FaBars size={24} onClick={() => setHamburgerOpen(!hamburgerOpen)} />
