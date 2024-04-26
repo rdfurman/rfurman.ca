@@ -1,40 +1,38 @@
-import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import styled from "styled-components";
 import WeddingLayout from "../components/weddinglayout";
 
-export const Head = () => <title>Daisy & Randy 2024</title>;
+export const Head = () => <title>Daisy & Randy 2024 - Info</title>;
+
+const Container = styled.div`
+  display: "flex";
+`;
+
+const GeneralInfoBox = styled.div`
+  flex: 1;
+  flex-direction: row;
+  width: 50%;
+`;
 
 const WeddingInfo = () => {
   return (
     <WeddingLayout>
-      <StaticImage
-        style={{
-          // gridRow: 1,
-          gridArea: "1/1",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          // opacity: 0.9 /* Adjust opacity for better readability */,
-          zIndex: -1,
-        }}
-        layout="fullWidth"
-        alt=""
-        src="../images/niagra-falls.jpg"
-        quality="100"
-      />
-      <div
-        style={{
-          // gridRow: 1,
-          gridArea: "1/1",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "normal",
-          alignItems: "center",
-          color: "white" /* Adjust content color for visibility */,
-          padding: "2rem",
-        }}
-      >
-        Some info here.
-      </div>
+      <Container>
+        <GeneralInfoBox>
+          <h2>General Info</h2>
+          <p>
+            This will be an outdoor ceremony in October so make sure bring warm
+            clothing!
+          </p>
+        </GeneralInfoBox>
+        <GeneralInfoBox>
+          <h2>Directions</h2>
+          <p>
+            This will be an outdoor ceremony in October so make sure bring warm
+            clothing!
+          </p>
+        </GeneralInfoBox>
+      </Container>
     </WeddingLayout>
   );
 };

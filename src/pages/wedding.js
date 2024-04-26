@@ -1,8 +1,9 @@
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import Gallery from "../components/gallery";
 import WeddingLayout from "../components/weddinglayout";
 
-export const Head = () => <title>Daisy & Randy 2024</title>;
+export const Head = () => <title>Daisy & Randy 2024 - Home</title>;
 
 const WeddingHome = () => {
   return (
@@ -28,7 +29,7 @@ const WeddingHome = () => {
           alignItems: "center",
           color: "white",
           padding: "2rem",
-          marginTop: "50px",
+          marginTop: "75px",
         }}
       >
         <div
@@ -52,6 +53,7 @@ const WeddingHome = () => {
           </h3>
         </div>
       </div>
+      <Gallery />
     </WeddingLayout>
   );
 };

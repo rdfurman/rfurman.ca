@@ -20,6 +20,8 @@ export default function WeddingLayout({ children }) {
           display: "flex",
           zIndex: 10,
           color: "white",
+          height: "3.5rem",
+          backgroundColor: "black",
         }}
       >
         <Link
@@ -30,7 +32,6 @@ export default function WeddingLayout({ children }) {
             marginTop: "0.5rem",
           }}
         >
-          {/* <h2 style={{ display: "flex" }}>rfurman</h2> */}
           <FaHome size={24} />
         </Link>
         <WeddingMenu />

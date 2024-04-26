@@ -19,8 +19,8 @@ const StyledLinksBox = styled.div`
     flex-direction: column;
     position: absolute;
     width: 100%;
-    top: 5rem;
-    padding-top: 1rem;
+    top: 3.48rem;
+    right: 0;
     text-align: center;
     background: black;
   }
@@ -36,16 +36,29 @@ const StyledHamburgerBox = styled.div`
 `;
 
 const HeaderListLink = styled.div`
-  margin-left: 1rem;
-  margin-bottom: 0rem;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
   color: white;
 `;
 
 const ListInternalLink = (props) => (
   <HeaderListLink>
-    <Link to={props.to} style={{ textShadow: "none", backgroundImage: "none" }}>
-      <h4 style={{ color: "white" }}>{props.children}</h4>
+    <Link to={props.to}>
+      <h4>{props.children}</h4>
     </Link>
+  </HeaderListLink>
+);
+
+const ListExternalLink = (props) => (
+  <HeaderListLink>
+    <a
+      href={props.to}
+      rel="noopener noreferrer"
+      target="_blank"
+      style={{ textShadow: "none", backgroundImage: "none" }}
+    >
+      <h4 style={{}}>{props.children}</h4>
+    </a>
   </HeaderListLink>
 );
 
@@ -56,7 +69,7 @@ export default function WeddingMenu() {
     <StyleMenuContainer>
       <StyledLinksBox open={hamburgerOpen}>
         <ListInternalLink to="/weddinginfo">Info</ListInternalLink>
-        <ListInternalLink to="https://google.ca">RSVP</ListInternalLink>
+        <ListExternalLink to="https://google.ca">RSVP</ListExternalLink>
       </StyledLinksBox>
       <StyledHamburgerBox open={hamburgerOpen}>
         <FaBars size={24} onClick={() => setHamburgerOpen(!hamburgerOpen)} />
