@@ -1,14 +1,14 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React from "react";
 import useGallery from "../hooks/useGallery";
-import "./gallery.css";
+import * as galleryStyles from "./gallery.module.css";
 
 const Gallery = () => {
   const images = useGallery();
 
   return (
     <div>
-      <div className="gallery">
+      <div className={galleryStyles.gallery}>
         {images.map(({ id, gatsbyImageData }) => {
           return (
             <GatsbyImage

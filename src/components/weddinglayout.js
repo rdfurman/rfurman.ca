@@ -3,16 +3,9 @@ import React from "react";
 import { FaHome } from "react-icons/fa";
 import WeddingMenu from "./weddingmenu";
 
-export const Head = () => <title>Daisy & Randy 2024</title>;
-
 export default function WeddingLayout({ children }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        minHeight: "100vh",
-      }}
-    >
+    <div>
       <header
         style={{
           padding: "15px",
