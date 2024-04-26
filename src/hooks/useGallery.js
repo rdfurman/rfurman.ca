@@ -5,7 +5,7 @@ const useGallery = () => {
     query {
       allFile(
         filter: { sourceInstanceName: { eq: "gallery" } }
-        sort: { childImageSharp: { fluid: { originalName: ASC } } }
+        sort: { absolutePath: ASC }
       ) {
         nodes {
           id
