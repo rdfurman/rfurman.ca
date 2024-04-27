@@ -17,6 +17,7 @@
   "license": "0BSD",
   "dependencies": {
     "@emotion/react": "^11.11.4",
+    "@fontsource/style-script": "^5.0.20",
     "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^5.13.4",
     "gatsby-plugin-emotion": "^8.13.1",

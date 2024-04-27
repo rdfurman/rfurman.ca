@@ -1,3 +1,4 @@
+import "@fontsource/style-script";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import Gallery from "../components/gallery";
@@ -43,13 +44,23 @@ const WeddingHome = () => {
               boxShadow: "0 0 10px 10px rgba(0, 0, 0, 0.6)",
             }}
           >
-            <h1 style={{ fontWeight: "bolder", fontFamily: "cursive" }}>
+            <h1
+              style={{
+                fontWeight: "bolder",
+                fontFamily: "'Style Script', cursive",
+              }}
+            >
               We're Getting Hitched!
             </h1>
-            <h3 style={{ fontWeight: "bolder", fontFamily: "cursive" }}>
+            <h3
+              style={{
+                fontWeight: "bolder",
+                fontFamily: "'Style Script', cursive",
+              }}
+            >
               2024-10-18
             </h3>
-            <h3 style={{ fontFamily: "cursive" }}>
+            <h3 style={{ fontFamily: "'Style Script', cursive" }}>
               Mountain-Aire Resort & Campground
             </h3>
           </div>
