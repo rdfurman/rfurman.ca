@@ -45,7 +45,8 @@ const WeddingInfo = () => {
             <InfoBoxTitle>Info</InfoBoxTitle>
             <h3>Schedule</h3>
             <p>
-              3PM - Ceremony
+              <h5>October 18, 2024</h5>
+              5PM - Ceremony
               <br />
               6PM - Dinner
             </p>

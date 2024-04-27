@@ -1,4 +1,4 @@
-import "@fontsource/style-script";
+import "@fontsource-variable/dancing-script";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import Gallery from "../components/gallery";
@@ -47,7 +47,7 @@ const WeddingHome = () => {
             <h1
               style={{
                 fontWeight: "bolder",
-                fontFamily: "'Style Script', cursive",
+                fontFamily: "'Dancing Script Variable', cursive",
               }}
             >
               We're Getting Hitched!
@@ -55,12 +55,12 @@ const WeddingHome = () => {
             <h3
               style={{
                 fontWeight: "bolder",
-                fontFamily: "'Style Script', cursive",
+                fontFamily: "'Dancing Script Variable', cursive",
               }}
             >
               2024-10-18
             </h3>
-            <h3 style={{ fontFamily: "'Style Script', cursive" }}>
+            <h3 style={{ fontFamily: "'Dancing Script Variable', cursive" }}>
               Mountain-Aire Resort & Campground
             </h3>
           </div>
