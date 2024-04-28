@@ -31,7 +31,7 @@ const WeddingHome = () => {
             alignItems: "center",
             color: "white",
             padding: "2rem",
-            marginTop: "75px",
+            marginTop: "10px",
           }}
         >
           <div
@@ -63,6 +63,7 @@ const WeddingHome = () => {
             <h3 style={{ fontFamily: "'Dancing Script Variable', cursive" }}>
               Mountain-Aire Resort & Campground
             </h3>
+            <h2>Please RSVP by July 31, 2024</h2>
           </div>
         </div>
         <Gallery />
