@@ -49,21 +49,11 @@ jobs:
           key: ${{secrets.DEPLOY_KEY}}
           known_hosts: ${{secrets.ssh_host}}
 
-      - name: Test What Server Prints
-        run: |
-          echo "=== Testing for unwanted output ==="
-          ssh -o StrictHostKeyChecking=no \
-            ${{secrets.ssh_user}}@${{secrets.ssh_host}} \
-            'echo "TEST_START"; bash --version; echo "TEST_END"' 2>&1 | tee ssh-test.log
-
-          echo ""
-          echo "=== If you see anything other than TEST_START, bash version, and TEST_END above, that's the problem ==="
-
       # Finally, deploy it to your very own server
       - name: Deploy To Live
         run: |
           rsync -avzh --delete \
-            -e 'ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR' \
+            -e 'ssh -o StrictHostKeyChecking=no -s /bin/bash' \
             public/* \
-            --rsync-path='bash -c "mkdir -p ${{secrets.target_dir}} && rsync"' \
+            --rsync-path='mkdir -p ${{secrets.target_dir}} && rsync' \
             ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
