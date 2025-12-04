@@ -32,7 +32,7 @@ jobs:
       - name: Set Node.js
         uses: actions/setup-node@v2.2.0
         with:
-          node-version: 18.x
+          node-version: 20.x
 
       # Install all the Node dependencies for Gatsby, using your package.json file.
       - name: Install Dependencies
@@ -51,4 +51,9 @@ jobs:
 
       # Finally, deploy it to your very own server
       - name: Deploy To Live
-        run: rsync -avzh --delete -e 'ssh -o StrictHostKeyChecking=no' public/* --rsync-path='mkdir -p ${{secrets.target_dir}} && rsync' ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
+        run: |
+          rsync -avzh --delete \
+            -e 'ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR' \
+            public/* \
+            --rsync-path='bash -c "mkdir -p ${{secrets.target_dir}} && rsync"' \
+            ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
