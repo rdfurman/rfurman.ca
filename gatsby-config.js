@@ -86,13 +86,6 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `gallery`,
-        path: `${__dirname}/content/gallery`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `demonshanker2`,
         path: `${__dirname}/static/demonshanker2`,
       },

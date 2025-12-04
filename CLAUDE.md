@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website built with Gatsby 5, featuring a blog, Unity WebGL game integration (Demon Shanker 2), and wedding section with photo gallery. The site uses React 18, styled-components, and Emotion for styling, with Typography.js (Funston theme) for typography.
+Personal portfolio website built with Gatsby 5, featuring a blog and Unity WebGL game integration (Demon Shanker 2). The site uses React 18, styled-components, and Emotion for styling, with Typography.js (Funston theme) for typography.
 
 ## Development Commands
 
@@ -35,28 +35,19 @@ When making changes that affect GraphQL queries or Gatsby's data layer:
 
 ## Architecture
 
-### Dual Layout System
+### Layout System
 
-The site uses **two distinct layout components** for different sections:
+The site uses a single layout component:
 
-1. **`Layout`** (`src/components/layout.js`) - Main site layout with header link to "/" and HamburgerMenu
-   - Used by: home page, blog pages, 404, Ludum Dare page
-
-2. **`WeddingLayout`** (`src/components/weddinglayout.js`) - Wedding section layout with header link to "/wedding" and WeddingMenu
-   - Used by: wedding pages (`/wedding`, `/weddinginfo`)
-   - Includes special styling (black header, white text)
-
-**Important**: When creating new pages, choose the appropriate layout based on the section:
-- General site content → use `Layout`
-- Wedding-related content → use `WeddingLayout`
+**`Layout`** (`src/components/layout.js`) - Main site layout with header link to "/" and HamburgerMenu
+- Used by: all pages (home, blog, 404, Ludum Dare)
 
 ### Content Sources and Data Layer
 
-Gatsby sources content from three filesystem locations (configured in `gatsby-config.js`):
+Gatsby sources content from two filesystem locations (configured in `gatsby-config.js`):
 
 1. **`content/blog`** - Blog posts as Markdown files
-2. **`content/gallery`** - Wedding gallery images (JPG files)
-3. **`static/demonshanker2`** - Unity WebGL game build files
+2. **`static/demonshanker2`** - Unity WebGL game build files
 
 The data flows through Gatsby's Node API (`gatsby-node.js`):
 
@@ -82,13 +73,6 @@ The `DemonShanker2` component (`src/components/demonshanker2.js`) integrates Uni
 - Game files located in `/static/demonshanker2/Build/`
 - **Fixed dimensions**: 1160x680px (update in component if game rebuild changes canvas size)
 
-### Gallery System
-
-Wedding gallery uses a custom hook pattern:
-- **`useGallery` hook** (`src/hooks/useGallery.js`) - GraphQL query to fetch all images from `content/gallery/` via `gatsby-source-filesystem`
-- **`Gallery` component** (`src/components/gallery.js`) - Renders gallery with gatsby-image optimization
-- Images processed by `gatsby-plugin-sharp` and `gatsby-transformer-sharp` for responsive images
-
 ### Site Metadata
 
 Extensive site metadata in `gatsby-config.js` includes:
@@ -100,12 +84,11 @@ Extensive site metadata in `gatsby-config.js` includes:
 
 ## Styling Approach
 
-Mixing three styling approaches (historical evolution):
+Mixing two styling approaches (historical evolution):
 1. **styled-components** - Primary styling system (most components)
 2. **Emotion** - Used alongside styled-components
-3. **CSS modules** - Gallery component uses `gallery.module.css`
 
-When adding styles, prefer styled-components for consistency unless working in gallery (which uses CSS modules).
+When adding styles, prefer styled-components for consistency.
 
 ## Key Configuration Files
 
@@ -118,7 +101,6 @@ When adding styles, prefer styled-components for consistency unless working in g
 When writing GraphQL queries:
 - Blog posts: Use `allMarkdownRemark` with frontmatter (`title`, `date`, `description`)
 - Images: Use `gatsby-plugin-image` with `gatsbyImageData` fragment
-- Gallery images: Filter by `sourceInstanceName: "gallery"`
 - Site metadata: Query from `site.siteMetadata`
 
 ## Plugin Dependencies
@@ -132,6 +114,6 @@ Core Gatsby plugins in use:
 
 ## Known Considerations
 
-- **React Unity WebGL version**: Currently on v9.5.2. Be cautious upgrading to v10.x (major version) without thorough testing of the game integration.
-- **Security vulnerabilities**: Project has 41 known vulnerabilities as of December 2024. See `UPGRADE_PLAN.md` for upgrade strategy.
+- **React Unity WebGL version**: Currently on v9.9.0. Be cautious upgrading to v10.x (major version) without thorough testing of the game integration.
+- **Security status**: Project upgraded to Gatsby 5.15.0 and React 18.3.1 in December 2024. npm audit shows 27 vulnerabilities (0 critical, 0 high). See `UPGRADE_PLAN.md` for details.
 - **Typography theme**: Uses external package `typography-theme-funston` - theming changes should be made carefully to preserve visual design.
