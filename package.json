@@ -15,6 +15,12 @@
     "clean": "gatsby clean"
   },
   "license": "0BSD",
+  "overrides": {
+    "react-server-dom-webpack": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@fontsource-variable/dancing-script": "^5.2.8",
