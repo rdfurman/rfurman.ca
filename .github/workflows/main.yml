@@ -49,11 +49,48 @@ jobs:
           key: ${{secrets.DEPLOY_KEY}}
           known_hosts: ${{secrets.ssh_host}}
 
-      # Finally, deploy it to your very own server
-      - name: Deploy To Live
+      # add after Install Deployment SSH Key (same job)
+      - name: Debug: SSH startup output
         run: |
-          rsync -avzh --delete \
-            -e 'ssh -o StrictHostKeyChecking=no' \
+          set -o pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=no ${{ secrets.ssh_user }}@${{ secrets.ssh_host }} 'echo REMOTE_OK' 2>&1 | tee ssh-startup.log
+        continue-on-error: true
+
+      - name: Debug: SSH verbose
+        run: |
+          ssh -vvv -o BatchMode=yes -o StrictHostKeyChecking=no ${{ secrets.ssh_user }}@${{ secrets.ssh_host }} 'echo REMOTE_OK' 2>&1 | tee ssh-vvv.log
+        continue-on-error: true
+
+      - name: Debug: remote rsync version
+        run: |
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=no ${{ secrets.ssh_user }}@${{ secrets.ssh_host }} 'rsync --version' 2>&1 | tee remote-rsync-version.log
+        continue-on-error: true
+
+      - name: Debug: run rsync with verbose and SSH debug
+        run: |
+          rsync -avzh --delete -vv --progress \
+            -e "ssh -vvv -o StrictHostKeyChecking=no" \
             public/* \
-            --rsync-path='mkdir -p ${{secrets.target_dir}} && rsync' \
-            ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
+            --rsync-path="mkdir -p ${{ secrets.target_dir }} && rsync" \
+            ${{ secrets.ssh_user }}@${{ secrets.ssh_host }}:${{ secrets.target_dir }} \
+            2>&1 | tee rsync-debug.log
+        continue-on-error: true
+
+      - name: Upload debug logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: deploy-debug-logs
+          path: |
+            ssh-startup.log
+            ssh-vvv.log
+            remote-rsync-version.log
+            rsync-debug.log
+
+      # Finally, deploy it to your very own server
+      # - name: Deploy To Live
+      #   run: |
+      #     rsync -avzh --delete \
+      #       -e 'ssh -o StrictHostKeyChecking=no' \
+      #       public/* \
+      #       --rsync-path='mkdir -p ${{secrets.target_dir}} && rsync' \
+      #       ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
