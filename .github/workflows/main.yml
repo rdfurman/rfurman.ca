@@ -53,7 +53,7 @@ jobs:
       - name: Deploy To Live
         run: |
           rsync -avzh --delete \
-            -e 'ssh -o StrictHostKeyChecking=no -s /bin/bash' \
+            -e 'ssh -o StrictHostKeyChecking=no' \
             public/* \
             --rsync-path='mkdir -p ${{secrets.target_dir}} && rsync' \
             ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
