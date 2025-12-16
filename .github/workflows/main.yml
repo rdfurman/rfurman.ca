@@ -1,59 +1,73 @@
-# This is a basic workflow to help you get started with Actions - you can change the name to be more reflective of your Action
+name: Build and Deploy
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push request events but only for the main branch
   push:
     branches: [master]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-  # Allows A Webhook to be called which will run the Action. Use this for example from WordPress with the GatsbyJS plugin.
   repository_dispatch:
     types: [publish_blog]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Check out latest code
-        uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      # Grab the required version of NodeJS
-      - name: Set Node.js
-        uses: actions/setup-node@v2.2.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: '20'
+          cache: 'npm'
 
-      # Install all the Node dependencies for Gatsby, using your package.json file.
-      - name: Install Dependencies
-        run: npm i --save
+      - name: Install dependencies
+        run: npm ci
 
-      # Speaks for itself no?
-      - name: Build Gatsby Site
+      - name: Build Gatsby site
         run: npm run build
 
-      # This was the hardest part for me to figure out - see article for more details
-      - name: Install Deployment SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{secrets.DEPLOY_KEY}}
-          known_hosts: ${{secrets.ssh_host}}
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
 
-      # Finally, deploy it to your very own server
-      - name: Deploy To Live
+          # Add private key
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          # Add known hosts for host key verification
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          # Create SSH config for this connection
+          cat > ~/.ssh/config <<EOF
+          Host deploy-server
+            HostName ${{ secrets.SSH_HOST }}
+            User ${{ secrets.SSH_USER }}
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking yes
+            UserKnownHostsFile ~/.ssh/known_hosts
+            BatchMode yes
+            LogLevel ERROR
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Test SSH connection
+        run: |
+          ssh deploy-server 'echo "SSH connection successful"'
+
+      - name: Deploy to server
         run: |
           rsync -avzh --delete \
-            -e 'ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR' \
-            public/* \
-            --rsync-path='bash -c "mkdir -p ${{secrets.target_dir}} && rsync"' \
-            ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir}}
+            --chown=deploy:www-data \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            -e "ssh -F $HOME/.ssh/config" \
+            public/ \
+            deploy-server:${{ secrets.TARGET_DIR }}/
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment completed successfully!"
+          ssh deploy-server "ls -la ${{ secrets.TARGET_DIR }} | head -20"
