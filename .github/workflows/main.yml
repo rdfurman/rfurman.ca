@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [master, fix-rsync]
+    branches: [master]
   workflow_dispatch:
   repository_dispatch:
     types: [publish_blog]
