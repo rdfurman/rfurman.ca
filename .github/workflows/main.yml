@@ -63,7 +63,7 @@ jobs:
             --chown=deploy:www-data \
             --exclude='.git' \
             --exclude='node_modules' \
-            -e "ssh -F ~/.ssh/config" \
+            -e "ssh -F $HOME/.ssh/config" \
             public/ \
             deploy-server:${{ secrets.TARGET_DIR }}/
 
