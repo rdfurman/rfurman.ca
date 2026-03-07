@@ -35,7 +35,7 @@ When making changes that affect GraphQL queries or Gatsby's data layer:
 
 ## Git Conventions
 
-- **Commit messages**: Short, single-line only (e.g. `Fix security vulnerabilities`)
+- **Commit messages**: Short, single-line only (e.g. `Fix security vulnerabilities`). Do NOT include `Co-Authored-By` trailers.
 
 ## Architecture
 
