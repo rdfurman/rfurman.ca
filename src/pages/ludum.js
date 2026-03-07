@@ -35,7 +35,7 @@ export default function Ludum() {
         <UnityContainer>
           <DemonShanker2 />
         </UnityContainer>
-        <ListExternalLink to="http://ludumdare.com/compo/ludum-dare-29/?action=preview&uid=37215">
+        <ListExternalLink to="https://web.archive.org/web/20210304161144/http://ludumdare.com/compo/ludum-dare-29/?action=preview&uid=37215">
           Ludum Dare Entry
         </ListExternalLink>
       </>
