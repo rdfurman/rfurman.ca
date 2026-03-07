@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Claude Code, etc.) when working with code in this repository.
 
 ## Project Overview
 
@@ -32,6 +32,10 @@ npm run clean
 When making changes that affect GraphQL queries or Gatsby's data layer:
 1. Run `npm run clean` to clear caches
 2. Restart development server with `npm run develop`
+
+## Git Conventions
+
+- **Commit messages**: Short, single-line only (e.g. `Fix security vulnerabilities`)
 
 ## Architecture
 
@@ -115,5 +119,6 @@ Core Gatsby plugins in use:
 ## Known Considerations
 
 - **React Unity WebGL version**: Currently on v9.9.0. Be cautious upgrading to v10.x (major version) without thorough testing of the game integration.
-- **Security status**: Project upgraded to Gatsby 5.15.0 and React 18.3.1 in December 2024. npm audit shows 27 vulnerabilities (0 critical, 0 high). See `UPGRADE_PLAN.md` for details.
+- **Security status**: All vulnerabilities resolved as of March 2026 via npm overrides and dependency upgrades. Run `npm audit` to verify.
+- **Lock file**: Always use a clean `rm -rf node_modules package-lock.json && npm install` when the lock file gets out of sync — do NOT chain multiple `npm audit fix` + `npm install` runs, as this can leave the lock file missing optional platform packages.
 - **Typography theme**: Uses external package `typography-theme-funston` - theming changes should be made carefully to preserve visual design.
