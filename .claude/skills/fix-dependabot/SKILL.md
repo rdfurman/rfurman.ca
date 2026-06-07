@@ -146,18 +146,33 @@ gh api repos/{owner}/{repo}/dependabot/alerts --paginate \
   --jq '[.[] | select(.state=="open")] | length'   # expect only known residuals
 ```
 
-## Known residual
+## Known residuals
 
-`file-type` (medium, ASF-parser infinite loop on a zero-size sub-header, fixed
-only in 21.3.1): **no usable fix exists for our stack.** The only fixed version,
-21.3.1, is ESM with a new API (`fileTypeFromFile`), but `gatsby-core-utils` calls
-the old `_fileType.default.fromFile(...)` — so an override loads a broken code
-path; downgrading `gatsby-source-filesystem` is a breaking regression.
+Both are **build-tool vulnerabilities in code paths Gatsby never executes** —
+accepted as known open Dependabot alerts, not fixed. Don't try to "fix" either by
+forcing an incompatible version; that just adds breakage or log noise (see below).
 
-**It's also unreachable here:** file-type's only caller is `gatsby-core-utils`'
-`fetchRemoteFile`, and this site sources zero remote files (all images local), so
-the ASF parser never runs in the build. Accepted as a known open Dependabot
-alert. Re-check after Gatsby upstream migrates off file-type 16.x. (If it ever
-needs closing without an upstream fix: `gh api --method PATCH
+### `file-type` (medium, ASF-parser infinite loop, GHSA-5v7r-6r5c-r473)
+Fixed only in 21.3.1, which is ESM with a new API (`fileTypeFromFile`), but
+`gatsby-core-utils` calls the old `_fileType.default.fromFile(...)` — so an
+override loads a broken code path; downgrading `gatsby-source-filesystem` is a
+breaking regression. **Unreachable:** file-type's only caller is
+`gatsby-core-utils`' `fetchRemoteFile`, and this site sources zero remote files
+(all images local), so the ASF parser never runs. Re-check after Gatsby migrates
+off file-type 16.x.
+
+### `@parcel/reporter-dev-server` (moderate, Origin Validation, GHSA-qm9p-f9j5-w83w)
+Fixed in 2.16.4, but `gatsby-parcel-config` pins the **entire** Parcel suite to
+2.8.3. Overriding only the reporter to 2.16.4 makes it incompatible with the
+running `@parcel/core@2.8.3` — Parcel logs *"plugin … not compatible … Requires
+^2.16.4 but the current version is 2.8.3"* (non-fatal, but noisy) and the reporter
+never loads. Bumping the whole 28-package Parcel suite to 2.16.4 is too risky
+(packages were removed/renamed since 2.8). **Unreachable:** the flaw is in
+Parcel's *dev server*, which Gatsby never runs (Parcel only bundles `gatsby-node`/
+config at build; `gatsby develop` uses webpack). So **do NOT** add a
+`@parcel/reporter-dev-server` override — it fixes nothing and reintroduces the
+log noise. Re-check after `gatsby-parcel-config` moves to Parcel ≥2.16.4.
+
+To close either alert without an upstream fix: `gh api --method PATCH
 repos/{owner}/{repo}/dependabot/alerts/<n> -f state=dismissed -f
-dismissed_reason=not_used`, or patch the ASF loop via patch-package.)
+dismissed_reason=not_used`.
