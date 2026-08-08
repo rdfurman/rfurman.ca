@@ -148,8 +148,8 @@ gh api repos/{owner}/{repo}/dependabot/alerts --paginate \
 
 ## Known residuals
 
-Both are **build-tool vulnerabilities in code paths Gatsby never executes** —
-accepted as known open Dependabot alerts, not fixed. Don't try to "fix" either by
+All are **build-tool vulnerabilities in code paths Gatsby never executes** —
+accepted as known open Dependabot alerts, not fixed. Don't try to "fix" any by
 forcing an incompatible version; that just adds breakage or log noise (see below).
 
 ### `file-type` (medium, ASF-parser infinite loop, GHSA-5v7r-6r5c-r473)
@@ -173,6 +173,21 @@ config at build; `gatsby develop` uses webpack). So **do NOT** add a
 `@parcel/reporter-dev-server` override — it fixes nothing and reintroduces the
 log noise. Re-check after `gatsby-parcel-config` moves to Parcel ≥2.16.4.
 
-To close either alert without an upstream fix: `gh api --method PATCH
+### `immutable` (high, hash-collision DoS + List trie overflow, GHSA-xvcm-6775-5m9r / GHSA-v56q-mh7h-f735)
+Fixed in 4.3.9 (or 5.1.8+), but the sole consumer —
+`@ardatan/relay-compiler@12.0.0` (via `gatsby`'s built-in GraphQL
+typescript-operations codegen) — declares `immutable: ~3.7.6`, a pre-rewrite
+API. Overriding past `<4.0.0` breaks that consumer; the fix requires
+`@ardatan/relay-compiler@13.x` (`immutable ^5.1.9`), which only arrives once
+Gatsby itself bumps `@graphql-codegen/typescript-operations`. **Unreachable:**
+both advisories require attacker-controlled *keys*/indices fed into
+`Immutable.Map`/`List` at runtime (e.g. `Immutable.fromJS(req.body)`); this
+dependency only runs inside `gatsby build`'s GraphQL codegen step, over
+queries/schema defined in this repo's own source — never over untrusted
+runtime input. Keep the existing `"immutable": ">=3.8.3 <4.0.0"` override (it
+pins the already-resolved 3.8.3, nothing more). Re-check after Gatsby bumps
+its `@graphql-codegen/typescript-operations` dependency.
+
+To close any of these alerts without an upstream fix: `gh api --method PATCH
 repos/{owner}/{repo}/dependabot/alerts/<n> -f state=dismissed -f
 dismissed_reason=not_used`.
