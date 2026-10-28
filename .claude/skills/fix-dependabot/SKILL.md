@@ -192,20 +192,20 @@ override breaks it. **Unreachable:** `gatsby-remark-images` only runs
 `queryString.parseUrl()` on image URLs in this repo's own markdown at build
 time. Re-check after `gatsby-remark-images` moves off `query-string` 6.x.
 
-### `webpack-dev-middleware` (high, path traversal, GHSA-g84c-rxfj-3j2c — npm audit only)
+### `webpack-dev-middleware` (high, path traversal, GHSA-g84c-rxfj-3j2c, alert #320)
 Fixed in 7.4.6 / 8.3.0 (no 5.x backport); Gatsby declares `^5.3.4`. **Not
 exploitable here:** the flaw needs a `publicPath` *without* a trailing slash,
 and Gatsby always passes `withTrailingSlash(publicPath)` (or `/`) from
 `utils/webpack.config.js` — the advisory's own workaround. Dev-server only
 (`gatsby develop`), never in the production build.
 
-### `deepmerge` (low, prototype poisoning, GHSA-gcqx-w48m-w2h4 — npm audit only)
+### `deepmerge` (low, prototype poisoning, GHSA-gcqx-w48m-w2h4, alert #321)
 No patched release exists (4.3.1 is latest). Used by `gatsby` and
 `gatsby-plugin-mdx` to merge their own config objects. Re-check when a fix ships.
 
 ### Withdrawn advisories (`braces` GHSA-vfj7-8cjw-p6xm, `sprintf-js` GHSA-hp3w-g68c-fv3c)
-GitHub withdrew these in Oct 2026 but left the alerts open. Nothing to fix —
-dismiss them (below) if they don't auto-close.
+GitHub withdrew these in Oct 2026; Dependabot auto-closed the alerts on its next
+rescan. Nothing to fix — ignore withdrawn advisories (dismiss if they linger).
 
 To close any of these alerts without an upstream fix: `gh api --method PATCH
 repos/{owner}/{repo}/dependabot/alerts/<n> -f state=dismissed -f
