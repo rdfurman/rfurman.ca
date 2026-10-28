@@ -173,21 +173,55 @@ config at build; `gatsby develop` uses webpack). So **do NOT** add a
 `@parcel/reporter-dev-server` override — it fixes nothing and reintroduces the
 log noise. Re-check after `gatsby-parcel-config` moves to Parcel ≥2.16.4.
 
-### `immutable` (high, hash-collision DoS + List trie overflow, GHSA-xvcm-6775-5m9r / GHSA-v56q-mh7h-f735)
-Fixed in 4.3.9 (or 5.1.8+), but the sole consumer —
-`@ardatan/relay-compiler@12.0.0` (via `gatsby`'s built-in GraphQL
-typescript-operations codegen) — declares `immutable: ~3.7.6`, a pre-rewrite
-API. Overriding past `<4.0.0` breaks that consumer; the fix requires
-`@ardatan/relay-compiler@13.x` (`immutable ^5.1.9`), which only arrives once
-Gatsby itself bumps `@graphql-codegen/typescript-operations`. **Unreachable:**
-both advisories require attacker-controlled *keys*/indices fed into
-`Immutable.Map`/`List` at runtime (e.g. `Immutable.fromJS(req.body)`); this
-dependency only runs inside `gatsby build`'s GraphQL codegen step, over
-queries/schema defined in this repo's own source — never over untrusted
-runtime input. Keep the existing `"immutable": ">=3.8.3 <4.0.0"` override (it
-pins the already-resolved 3.8.3, nothing more). Re-check after Gatsby bumps
-its `@graphql-codegen/typescript-operations` dependency.
+### `@graphql-tools/utils` (high, `mergeDeep` prototype pollution, GHSA-7mx3-vvmw-hjmv)
+Fixed only in 12.0.1; Gatsby's codegen stack pins 9.2.1 (and 8.13.1 under
+`@graphql-codegen/plugin-helpers@2`), so an override is a 3-major jump under
+`@graphql-codegen/*` v2/v3 — not worth the breakage risk. **Unreachable:** every
+`@graphql-tools`/`@graphql-codegen` import in Gatsby lives in
+`utils/graphql-typegen/ts-codegen.js`, and its `writeTypeScriptTypes` calls are
+all gated on `graphqlTypegen` in `gatsby-config.js` (build.js also requires
+`generateOnBuild`), which this site doesn't enable. Even when enabled, it only
+merges this repo's own schema/queries. Re-check after Gatsby bumps its
+`@graphql-codegen` deps.
+
+### `decode-uri-component` (moderate, exponential decoding DoS, GHSA-vcc3-ghjq-m6fr)
+Fixed only in 0.5.0, which is ESM-only (`type: module`), while the consumer
+`query-string@6.14.1` (via `gatsby-remark-images`) does
+`require('decode-uri-component')` and calls the result as a function — an
+override breaks it. **Unreachable:** `gatsby-remark-images` only runs
+`queryString.parseUrl()` on image URLs in this repo's own markdown at build
+time. Re-check after `gatsby-remark-images` moves off `query-string` 6.x.
+
+### `webpack-dev-middleware` (high, path traversal, GHSA-g84c-rxfj-3j2c — npm audit only)
+Fixed in 7.4.6 / 8.3.0 (no 5.x backport); Gatsby declares `^5.3.4`. **Not
+exploitable here:** the flaw needs a `publicPath` *without* a trailing slash,
+and Gatsby always passes `withTrailingSlash(publicPath)` (or `/`) from
+`utils/webpack.config.js` — the advisory's own workaround. Dev-server only
+(`gatsby develop`), never in the production build.
+
+### `deepmerge` (low, prototype poisoning, GHSA-gcqx-w48m-w2h4 — npm audit only)
+No patched release exists (4.3.1 is latest). Used by `gatsby` and
+`gatsby-plugin-mdx` to merge their own config objects. Re-check when a fix ships.
+
+### Withdrawn advisories (`braces` GHSA-vfj7-8cjw-p6xm, `sprintf-js` GHSA-hp3w-g68c-fv3c)
+GitHub withdrew these in Oct 2026 but left the alerts open. Nothing to fix —
+dismiss them (below) if they don't auto-close.
 
 To close any of these alerts without an upstream fix: `gh api --method PATCH
 repos/{owner}/{repo}/dependabot/alerts/<n> -f state=dismissed -f
 dismissed_reason=not_used`.
+
+## Overrides that ARE the fix (don't loosen)
+
+- **`immutable: ">=3.8.4 <4.0.0"`** — the sole consumer
+  (`@ardatan/relay-compiler@12.0.0`, in Gatsby's typegen codegen) declares
+  `~3.7.6`, so without this override it resolves to a vulnerable 3.7.x. 3.8.4
+  is the backport fixing GHSA-xvcm-6775-5m9r / GHSA-v56q-mh7h-f735; 4.x+ breaks
+  the consumer.
+- **`typescript: ">=6.0.3 <7.0.0"`** — not a security fix: `typescript` only
+  arrives as an open-ended optional peer (`>= 2.7`) of
+  `fork-ts-checker-webpack-plugin`/`tsutils`, so a clean lock regen grabs
+  TypeScript 7 (native port, no `createProgram`/`SyntaxKind` JS API). The pin
+  keeps it on the last JS-API line. After any clean regen, diff the old vs new
+  lock for **major** bumps — open-ended peers and `>=` overrides are where
+  surprises come from.

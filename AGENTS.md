@@ -119,6 +119,6 @@ Core Gatsby plugins in use:
 ## Known Considerations
 
 - **React Unity WebGL version**: Currently on v9.9.0. Be cautious upgrading to v10.x (major version) without thorough testing of the game integration.
-- **Security status**: All vulnerabilities resolved as of March 2026 via npm overrides and dependency upgrades. Run `npm audit` to verify.
+- **Security status**: As of October 2026, all fixable vulnerabilities are resolved via npm overrides and dependency upgrades; the remaining open alerts are unreachable build-tool residuals documented in `.claude/skills/fix-dependabot/SKILL.md`. Run `npm audit` to verify.
 - **Lock file**: Always use a clean `rm -rf node_modules package-lock.json && npm install` when the lock file gets out of sync — do NOT chain multiple `npm audit fix` + `npm install` runs, as this can leave the lock file missing optional platform packages.
 - **Typography theme**: Uses external package `typography-theme-funston` - theming changes should be made carefully to preserve visual design.
